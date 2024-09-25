@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Notes</h1>
+    <textarea id="notes" placeholder="Type your notes here..."></textarea>
+    <button id="saveButton">Save Notes</button>
+    <button id="clearButton">Clear Notes</button>
+
+    <script>
+        // Get references to the textarea and buttons
+        const notesTextarea = document.getElementById('notes');
+        const saveButton = document.getElementById('saveButton');
+        const clearButton = document.getElementById('clearButton');
+
+        // Load saved notes from Local Storage
+        window.onload = function() {
+            const savedNotes = localStorage.getItem('myNotes');
+            if (savedNotes) {
+                notesTextarea.value = savedNotes;
+            }
+        };
+
+        // Save notes to Local Storage when the button is clicked
+        saveButton.addEventListener('click', function() {
+            const notes = notesTextarea.value;
+            localStorage.setItem('myNotes', notes);
+            alert('Notes saved!');
+        });
+
+        // Clear notes from the textarea and Local Storage
+        clearButton.addEventListener('click', function() {
+            notesTextarea.value = '';
+            localStorage.removeItem('myNotes');
+            alert('Notes cleared!');
+        });
+    </script>
+</body>
+</html>
